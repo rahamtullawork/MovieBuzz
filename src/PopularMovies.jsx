@@ -38,6 +38,41 @@ export default function PopularMovies() {
 
     return (
         <div className='container my-5'>
+              {/* ADD CAROUSEL HERE */}
+        <div id="carouselExampleSlidesOnly" className="carousel slide mb-5" data-bs-ride="carousel">
+
+            <div className="carousel-inner">
+
+                <div className="carousel-item active">
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4GYLRilBBLvf63KbMjU3-WU73KfDk_yeeuY3wtZUwUg&s=10"
+                        className="d-block w-100 "
+                        alt="Movie Banner 1"
+                    />
+                </div>
+
+                <div className="carousel-item">
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRwSrkAi3A2ZZ2-63F4GAwt7pdq5FNM-jPyMMS7jOtiQ&s=10"
+                        className="d-block w-100"
+                        alt="Movie Banner 2"
+                    />
+                </div>
+
+                <div className="carousel-item">
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYrIRJU60fKv84L9X9UFI0IYfX4caAAHrhgqJzEAVcQg&s=10"
+                        className="d-block w-100"
+                        alt="Movie Banner 3"
+                    />
+                </div>
+
+            </div>
+        </div>
+
+
+
+
             <div className='d-flex justify-content-between align-items-center mb-4'>
                 <h2 className='fw-bold text-primary'>Popular Movies</h2>
                 <span className='badge bg-secondary fs-6'>Page {page} of {totalPages}</span>
