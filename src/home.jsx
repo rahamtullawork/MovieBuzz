@@ -105,7 +105,7 @@ export default function Home() {
                 handleSearch={searchMovies}
             />
 
-            <div className="container my-5">
+            <div className="container-fluid search-results-container my-4">
 
                 {searched && (
 

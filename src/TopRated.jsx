@@ -40,7 +40,7 @@ export default function TopRated() {
 
                 <div className='d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 pb-3 border-bottom border-secondary border-opacity-25 gap-3'>
                     <div>
-                        <h2 className='fw-extrabold text-white display-6 mb-0'>Trending Movies</h2>
+                        <h2 className='fw-extrabold text-white display-6 mb-0'>Top Rated Movies</h2>
                     </div>
                     <div className="badge-pill-container px-3 py-2 rounded-pill bg-dark border border-secondary border-opacity-50 text-light shadow-sm">
                         Page <span className="text-danger fw-bold">{page}</span> of {totalPages}

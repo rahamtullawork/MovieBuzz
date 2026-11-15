@@ -7,6 +7,7 @@ body, html {
 .moviebuzz-wrapper {
   background: radial-gradient(circle at top center, #1a1f2c 0%, #0f1117 100%);
   min-height: 100vh;
+  
 }
 
 /* Card Styling & Hover Effects */
@@ -75,6 +76,15 @@ body, html {
   color: #94a3b8;
   line-height: 1.5;
   margin-bottom: 0;
+}
+
+/* Expand Popular Movies content */
+.moviebuzz-wrapper .container {
+    width: 95% !important;
+    max-width: 1800px !important;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50px !important;
 }
 
 <<<<<<< Updated upstream
