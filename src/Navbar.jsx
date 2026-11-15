@@ -42,8 +42,8 @@ export default function Navbar({ searchTerm, setSearchTerm, handleSearch }) {
 
               <ul className="dropdown-menu">
                 <li>
-                  <Link className="dropdown-item" to="/upcoming">
-                    Upcoming
+                  <Link className="dropdown-item" to="/trending">
+                    Trending
                   </Link>
                 </li>
                 <li>
