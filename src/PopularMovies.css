@@ -7,7 +7,6 @@ body, html {
 .moviebuzz-wrapper {
   background: radial-gradient(circle at top center, #1a1f2c 0%, #0f1117 100%);
   min-height: 100vh;
-  
 }
 
 /* Card Styling & Hover Effects */
@@ -78,39 +77,8 @@ body, html {
   margin-bottom: 0;
 }
 
-/* Expand Popular Movies content */
-.moviebuzz-wrapper .container {
-    width: 95% !important;
-    max-width: 1800px !important;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 50px !important;
-}
-
-<<<<<<< Updated upstream
 /* Rating badge sizing */
 .rating-badge {
   font-size: 0.8rem;
   line-height: 1;
 }
-=======
-/* Buttons */
-.details-btn {
-  border-color: rgba(255, 255, 255, 0.2);
-  transition: all 0.2s ease;
-}
-
-.details-btn:hover {
-  background-color: #dc3545;
-  border-color: #dc3545;
-  color: white;
-}
-
-.page-btn {
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.page-btn:active:not(:disabled) {
-  transform: scale(0.95);
-}
->>>>>>> Stashed changes

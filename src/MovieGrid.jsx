@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './PopularMovies.css';
-import axios from 'axios';
 
-export default function TrendingMovies() {
+export default function MovieGrid({ title, endpoint }) {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -13,39 +12,43 @@ export default function TrendingMovies() {
     const image_url = 'https://image.tmdb.org/t/p/w500';
 
     useEffect(() => {
-        fetchTopRatedMovies();
-    }, [page]);
+        setPage(1); 
+    }, [endpoint]);
 
-    function fetchTopRatedMovies() {
-        setLoading(true);
-        setError(null);
+    useEffect(() => {
+        const fetchMovies = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                const response = await fetch(`https://api.themoviedb.org/3/${endpoint}?api_key=${api_key}&language=en-US&page=${page}`);
 
-        axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${api_key}&language=en-US}`)
-            .then((res) => {
-                setMovies(res.data.results);
-                setTotalPages(res.data.total_pages);
-                setLoading(false);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }).catch((err) => {
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                setMovies(data.results);
+                setTotalPages(data.total_pages > 500 ? 500 : data.total_pages);
+            } catch (err) {
                 setError(err.message);
+            } finally {
                 setLoading(false);
-            });
-    }
-
-    console.log(movies)
+            }
+        };
+        fetchMovies();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [page, endpoint, api_key]);
 
     return (
-        <div className="moviebuzz-wrapper py-5">
+        <div className="container-fluid moviebuzz-wrapper px-4 px-lg-5 py-5">
             <div className='container'>
-
+                {/* Header Banner Section */}
                 <div className='d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 pb-3 border-bottom border-secondary border-opacity-25 gap-3'>
                     <div>
-                        <h2 className='fw-extrabold text-white display-6 mb-0'>Trending Movies</h2>
+                        <h2 className='fw-extrabold text-white display-6 mb-0'>{title}</h2>
                     </div>
                     <div className="badge-pill-container px-3 py-2 rounded-pill bg-dark border border-secondary border-opacity-50 text-light shadow-sm">
                         Page <span className="text-danger fw-bold">{page}</span> of {totalPages}
                     </div>
-
                 </div>
 
                 {loading && (
@@ -77,25 +80,23 @@ export default function TrendingMovies() {
                                                         : 'https://via.placeholder.com/500x750?text=No+Image'
                                                 }
                                                 className="card-img-top img-fluid"
-                                                alt={movie.title}
+                                                alt={movie.title || movie.name}
                                                 loading="lazy"
                                             />
-
                                             <div className="rating-badge position-absolute top-0 end-0 m-3 px-2 py-1 rounded-pill fw-bold shadow">
                                                 ★ {movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}
                                             </div>
-
                                             <div className="card-gradient-overlay"></div>
                                         </div>
                                         <div className="card-body d-flex flex-column justify-content-between p-4">
                                             <div>
                                                 <div className="d-flex justify-content-between align-items-center mb-1">
                                                     <span className="text-muted small fw-semibold">
-                                                        {movie.release_date ? movie.release_date.split('-')[0] : 'N/A'}
+                                                        {movie.release_date ? movie.release_date.split('-')[0] : (movie.first_air_date ? movie.first_air_date.split('-')[0] : 'N/A')}
                                                     </span>
                                                 </div>
-                                                <h5 className="card-title fw-bold text-truncate mb-2" title={movie.title}>
-                                                    {movie.title}
+                                                <h5 className="card-title fw-bold text-truncate mb-2" title={movie.title || movie.name}>
+                                                    {movie.title || movie.name}
                                                 </h5>
                                                 <p className="card-text movie-overview">
                                                     {movie.overview || 'No synopsis available for this title.'}
@@ -110,6 +111,7 @@ export default function TrendingMovies() {
                             ))}
                         </div>
 
+                        {/* Pagination Controls */}
                         <div className="d-flex justify-content-center align-items-center gap-3 mt-5 pt-4">
                             <button
                                 className="btn btn-dark px-4 py-2 rounded-pill border border-secondary border-opacity-50 text-light fw-semibold page-btn"
@@ -131,5 +133,5 @@ export default function TrendingMovies() {
                 )}
             </div>
         </div>
-    )
+    );
 }
